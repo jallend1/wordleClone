@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Header from './Components/Header';
+import Keyboard from './Components/Keyboard';
 
 function App() {
   const words = ['howdy', 'score'];
@@ -6,21 +8,24 @@ function App() {
   const [guess, setGuess] = useState('');
 
   const handleLetter = ({ key }) => {
-    console.log(guess);
     const currentGuess = guess + key;
-    console.log(currentGuess);
+
     setGuess(currentGuess);
   };
 
-  useEffect(() => {
-    window.addEventListener('keydown', handleLetter);
-    return () => window.removeEventListener('keydown', handleLetter);
-  }, []);
+  window.addEventListener('keydown', handleLetter);
+
+  // useEffect(() => {
+  //   window.addEventListener('keydown', handleLetter);
+  //   return () => window.removeEventListener('keydown', handleLetter);
+  // }, []);
 
   return (
     <div className="App">
+      <Header />
       <p>{word}</p>
       <p>{guess}</p>
+      <Keyboard />
     </div>
   );
 }
