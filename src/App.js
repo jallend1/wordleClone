@@ -5,11 +5,22 @@ function App() {
   const word = words[1];
   const [guess, setGuess] = useState('');
 
-  const handleGuess = (e) => console.log(e);
+  const handleLetter = ({ key }) => {
+    console.log(guess);
+    const currentGuess = guess + key;
+    console.log(currentGuess);
+    setGuess(currentGuess);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleLetter);
+    return () => window.removeEventListener('keydown', handleLetter);
+  }, []);
 
   return (
     <div className="App">
       <p>{word}</p>
+      <p>{guess}</p>
     </div>
   );
 }
