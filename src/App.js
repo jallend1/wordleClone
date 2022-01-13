@@ -7,18 +7,16 @@ function App() {
   const word = words[1];
   const [guess, setGuess] = useState('');
 
-  const handleLetter = ({ key }) => {
-    const currentGuess = guess + key;
-
-    setGuess(currentGuess);
+  const handleLetter = (e) => {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+      const currentGuess = guess + e.key;
+      setGuess(currentGuess);
+    }
   };
-
-  window.addEventListener('keydown', handleLetter);
-
-  // useEffect(() => {
-  //   window.addEventListener('keydown', handleLetter);
-  //   return () => window.removeEventListener('keydown', handleLetter);
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('keydown', handleLetter);
+    return () => window.removeEventListener('keydown', handleLetter);
+  });
 
   return (
     <div className="App">
