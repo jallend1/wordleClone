@@ -5,13 +5,13 @@ import Keyboard from './Components/Keyboard';
 function App() {
   const words = ['howdy', 'score'];
   const word = words[1];
-  const [guess, setGuess] = useState('');
+  const [guess, setGuess] = useState([]);
   const [guessHistory, setGuessHistory] = useState([]);
   const [progress, setProgress] = useState([]);
   const [message, setMessage] = useState('');
 
   const checkGuess = (currentGuess) => {
-    if (currentGuess === word) {
+    if (currentGuess.join('') === word) {
       setMessage('WE HAVE A WINNER');
     } else {
       // Array for tracking which letters are accurate
@@ -42,7 +42,8 @@ function App() {
 
   const handleLetter = (e) => {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
-      const currentGuess = guess + e.key;
+      const currentGuess = guess.slice();
+      currentGuess.push(e.key);
       setGuess(currentGuess);
       if (currentGuess.length === 5) {
         checkGuess(currentGuess);
