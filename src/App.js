@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from './Components/Header';
+import WordRow from './Components/WordRow';
 import Keyboard from './Components/Keyboard';
 
 function App() {
@@ -16,8 +17,7 @@ function App() {
     } else {
       // Array for tracking which letters are accurate
       const answers = [];
-      const currentGuessArray = Array.from(currentGuess);
-      currentGuessArray.forEach((guess, index) => {
+      currentGuess.forEach((guess, index) => {
         // If the letter is in the right spot, gets green
         if (word[index] === guess) {
           answers[index] = 'green';
@@ -59,6 +59,7 @@ function App() {
     <div className="App">
       <Header />
       <h2>{message}</h2>
+      <WordRow letters={guess} />
       <p>{word}</p>
       <p>{guess}</p>
       <Keyboard />
