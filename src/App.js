@@ -6,9 +6,16 @@ import Keyboard from './Components/Keyboard';
 function App() {
   const words = ['howdy', 'score'];
   const word = words[1];
+  // const gameBoardLayout = new Array(6).fill(new Array(5).fill(null));
+  // console.log(gameBoardLayout);
   const [guess, setGuess] = useState([]);
   const [guessHistory, setGuessHistory] = useState([]);
-  const [progress, setProgress] = useState([]);
+  const [turn, setTurn] = useState([0, 0]);
+  // Creates array of 6 rows and 5 columns
+  const [gameBoard, setGameBoard] = useState(
+    new Array(6).fill(new Array(5).fill(null))
+  );
+  console.log(gameBoard);
   const [message, setMessage] = useState('');
 
   const checkGuess = (currentGuess) => {
