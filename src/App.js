@@ -6,16 +6,16 @@ import Keyboard from './Components/Keyboard';
 function App() {
   const words = ['howdy', 'score'];
   const word = words[1];
-  // const gameBoardLayout = new Array(6).fill(new Array(5).fill(null));
-  // console.log(gameBoardLayout);
-  const [guess, setGuess] = useState([]);
-  const [guessHistory, setGuessHistory] = useState([]);
-  const [turn, setTurn] = useState([0, 0]);
-  // Creates array of 6 rows and 5 columns
-  const [gameBoard, setGameBoard] = useState(
-    new Array(6).fill(new Array(5).fill(null))
-  );
-  console.log(gameBoard);
+  const [turn, setTurn] = useState(0);
+
+  const [gameBoard, setGameBoard] = useState([
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null]
+  ]);
   const [message, setMessage] = useState('');
 
   const checkGuess = (currentGuess) => {
@@ -36,25 +36,33 @@ function App() {
           answers[index] = 'neutral';
         }
       });
-      const newGuessHistory = guessHistory.slice();
-      newGuessHistory.push(answers);
-      // You get six guesses, my dude
-      if (newGuessHistory.length === 6) {
-        setMessage('Game over :(');
-      }
-      setGuessHistory(newGuessHistory);
-      setGuess('');
     }
+  };
+
+  const determineRow = () => {
+    if (turn > 4) {
+      return Math.floor(turn / 5);
+    } else {
+      return 0;
+    }
+  };
+
+  const determineRowIndex = () => {
+    return turn % 5;
   };
 
   const handleLetter = (e) => {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
-      const currentGuess = guess.slice();
-      currentGuess.push(e.key);
-      setGuess(currentGuess);
-      if (currentGuess.length === 5) {
-        checkGuess(currentGuess);
+      const row = determineRow();
+      const rowIndex = determineRowIndex();
+      const newGameBoard = gameBoard.slice();
+      newGameBoard[row][rowIndex] = e.key;
+      setGameBoard(newGameBoard);
+      if (rowIndex === 4) {
+        checkGuess(newGameBoard[row]);
       }
+      const newTurn = turn + 1;
+      setTurn(newTurn);
     }
   };
   useEffect(() => {
@@ -66,9 +74,10 @@ function App() {
     <div className="App">
       <Header />
       <h2>{message}</h2>
-      <WordRow letters={guess} />
+      {gameBoard.map((row) => (
+        <WordRow letters={row} key={Math.random()} />
+      ))}
       <p>{word}</p>
-      <p>{guess}</p>
       <Keyboard />
     </div>
   );
