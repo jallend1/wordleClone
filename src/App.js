@@ -9,7 +9,7 @@ function App() {
   const [turn, setTurn] = useState(0);
   const [message, setMessage] = useState('');
   const [isGameOver, setIsGameOver] = useState(false);
-
+  const [answerKey, setAnswerKey] = useState([]);
   const [gameBoard, setGameBoard] = useState([
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -20,12 +20,13 @@ function App() {
   ]);
 
   const checkGuess = (currentGuess) => {
+    const answers = new Array(5);
     if (currentGuess.join('') === word) {
+      answers.fill('green');
       setMessage('WE HAVE A WINNER');
       setIsGameOver(true);
     } else {
       // Array for tracking which letters are accurate
-      const answers = [];
       currentGuess.forEach((guess, index) => {
         // If the letter is in the right spot, gets green
         if (word[index] === guess) {
@@ -35,7 +36,7 @@ function App() {
         else if (word.includes(guess)) {
           answers[index] = 'yellow';
         } else {
-          answers[index] = 'neutral';
+          answers[index] = 'gray';
         }
       });
     }
@@ -44,6 +45,9 @@ function App() {
       setIsGameOver(true);
       setMessage('So sorry :(');
     }
+    const newAnswerKey = answerKey.slice();
+    newAnswerKey.push(answers);
+    setAnswerKey(newAnswerKey);
   };
 
   const determineRow = () => {
@@ -83,8 +87,8 @@ function App() {
     <div className="App">
       <Header />
       <h2>{message}</h2>
-      {gameBoard.map((row, index) => (
-        <WordRow letters={row} key={index} />
+      {gameBoard.map((letters, index) => (
+        <WordRow letters={letters} answers={answerKey[index]} key={index} />
       ))}
       <p>{word}</p>
       <Keyboard />
