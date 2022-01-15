@@ -39,6 +39,7 @@ function App() {
         }
       });
     }
+    // Reaching the end of the game and no victory message, display losing message
     if (turn >= 29 && message === '') {
       setIsGameOver(true);
       setMessage('So sorry :(');
@@ -82,8 +83,8 @@ function App() {
     <div className="App">
       <Header />
       <h2>{message}</h2>
-      {gameBoard.map((row) => (
-        <WordRow letters={row} key={Math.random()} />
+      {gameBoard.map((row, index) => (
+        <WordRow letters={row} key={index} />
       ))}
       <p>{word}</p>
       <Keyboard />
