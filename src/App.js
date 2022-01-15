@@ -7,6 +7,8 @@ function App() {
   const words = ['howdy', 'score'];
   const word = words[1];
   const [turn, setTurn] = useState(0);
+  const [message, setMessage] = useState('');
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const [gameBoard, setGameBoard] = useState([
     [null, null, null, null, null],
@@ -16,11 +18,11 @@ function App() {
     [null, null, null, null, null],
     [null, null, null, null, null]
   ]);
-  const [message, setMessage] = useState('');
 
   const checkGuess = (currentGuess) => {
     if (currentGuess.join('') === word) {
       setMessage('WE HAVE A WINNER');
+      setIsGameOver(true);
     } else {
       // Array for tracking which letters are accurate
       const answers = [];
@@ -37,6 +39,10 @@ function App() {
         }
       });
     }
+    if (turn >= 29 && message === '') {
+      setIsGameOver(true);
+      setMessage('So sorry :(');
+    }
   };
 
   const determineRow = () => {
@@ -52,17 +58,19 @@ function App() {
   };
 
   const handleLetter = (e) => {
-    if (e.keyCode >= 65 && e.keyCode <= 90) {
-      const row = determineRow();
-      const rowIndex = determineRowIndex();
-      const newGameBoard = gameBoard.slice();
-      newGameBoard[row][rowIndex] = e.key;
-      setGameBoard(newGameBoard);
-      if (rowIndex === 4) {
-        checkGuess(newGameBoard[row]);
+    if (!isGameOver) {
+      if (e.keyCode >= 65 && e.keyCode <= 90) {
+        const row = determineRow();
+        const rowIndex = determineRowIndex();
+        const newGameBoard = gameBoard.slice();
+        newGameBoard[row][rowIndex] = e.key;
+        setGameBoard(newGameBoard);
+        if (rowIndex === 4) {
+          checkGuess(newGameBoard[row]);
+        }
+        const newTurn = turn + 1;
+        setTurn(newTurn);
       }
-      const newTurn = turn + 1;
-      setTurn(newTurn);
     }
   };
   useEffect(() => {
