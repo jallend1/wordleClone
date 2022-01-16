@@ -87,9 +87,11 @@ function App() {
     <div className="App">
       <Header />
       <h2>{message}</h2>
-      {gameBoard.map((letters, index) => (
-        <WordRow letters={letters} answers={answerKey[index]} key={index} />
-      ))}
+      <div className="gameboard">
+        {gameBoard.map((letters, index) => (
+          <WordRow letters={letters} answers={answerKey[index]} key={index} />
+        ))}
+      </div>
       <p>{word}</p>
       <Keyboard />
     </div>

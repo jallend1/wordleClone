@@ -7,7 +7,7 @@ const WordRow = ({ letters, answers }) => {
             className="letter"
             key={Math.random()}
             style={{
-              backgroundColor: answers ? answers[index] : 'purple'
+              backgroundColor: answers ? answers[index] : null
             }}
           >
             {letter}
