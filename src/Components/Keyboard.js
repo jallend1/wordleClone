@@ -1,7 +1,4 @@
-const Keyboard = () => {
-  const handleKeyClick = (e) => {
-    console.log(e.target.textContent.toLowerCase());
-  };
+const Keyboard = ({ handleKeyClick }) => {
   return (
     <div className="keyboard">
       <div className="top-keys">

@@ -62,25 +62,35 @@ function App() {
     return turn % 5;
   };
 
-  const handleLetter = (e) => {
+  const handleKeyPress = (e) => {
+    if (e.keyCode >= 65 && e.keyCode <= 90) {
+      const letter = e.key;
+      handleLetter(letter);
+    }
+  };
+
+  const handleKeyClick = (e) => {
+    const letter = e.target.textContent.toLowerCase();
+    handleLetter(letter);
+  };
+
+  const handleLetter = (letter) => {
     if (!isGameOver) {
-      if (e.keyCode >= 65 && e.keyCode <= 90) {
-        const row = determineRow();
-        const rowIndex = determineRowIndex();
-        const newGameBoard = gameBoard.slice();
-        newGameBoard[row][rowIndex] = e.key;
-        setGameBoard(newGameBoard);
-        if (rowIndex === 4) {
-          checkGuess(newGameBoard[row]);
-        }
-        const newTurn = turn + 1;
-        setTurn(newTurn);
+      const row = determineRow();
+      const rowIndex = determineRowIndex();
+      const newGameBoard = gameBoard.slice();
+      newGameBoard[row][rowIndex] = letter;
+      setGameBoard(newGameBoard);
+      if (rowIndex === 4) {
+        checkGuess(newGameBoard[row]);
       }
+      const newTurn = turn + 1;
+      setTurn(newTurn);
     }
   };
   useEffect(() => {
-    window.addEventListener('keydown', handleLetter);
-    return () => window.removeEventListener('keydown', handleLetter);
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
   });
 
   return (
@@ -93,7 +103,7 @@ function App() {
         ))}
       </div>
       <p>{word}</p>
-      <Keyboard />
+      <Keyboard handleKeyClick={handleKeyClick} />
     </div>
   );
 }
