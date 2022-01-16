@@ -10,7 +10,7 @@ const WordRow = ({ letters, answers }) => {
               backgroundColor: answers ? answers[index] : null
             }}
           >
-            {letter}
+            {letter ? letter.toUpperCase() : null}
           </div>
         ))}
     </div>

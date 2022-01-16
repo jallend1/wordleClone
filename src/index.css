@@ -27,8 +27,9 @@ code {
   line-height: 2rem;
   width: 50px;
   height: 60px;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   margin: 0.25em;
+  border: solid 3px gray;
 }
 
 .keyboard {
