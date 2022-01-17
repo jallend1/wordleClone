@@ -100,7 +100,6 @@ function App() {
       setIsGameOver(true);
       setMessage('So sorry :(');
     }
-    // updateKeyboard(currentGuess);
     const newAnswerKey = answerKey.slice();
     newAnswerKey.push(answers);
     setAnswerKey(newAnswerKey);
@@ -131,6 +130,8 @@ function App() {
   };
 
   const handleLetter = (letter) => {
+    // TODO: Implement Enter / Backspace Checks
+    // TODO: Stop auto-sending it over for check after 5th letter; Wait for enter
     if (!isGameOver) {
       const row = determineRow();
       const rowIndex = determineRowIndex();
@@ -146,7 +147,8 @@ function App() {
   };
 
   const updateKeyboard = () => {
-    console.log('inside update!');
+    // TODO: This whole thing needs some cleanup.
+    // TODO: Accidentally directly updating state here by modifying the object
     const newKeys = keys.slice();
     preciseLetters.forEach((letter) => {
       newKeys.forEach((row) => {
