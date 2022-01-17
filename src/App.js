@@ -100,6 +100,7 @@ function App() {
       setIsGameOver(true);
       setMessage('So sorry :(');
     }
+    // updateKeyboard(currentGuess);
     const newAnswerKey = answerKey.slice();
     newAnswerKey.push(answers);
     setAnswerKey(newAnswerKey);
@@ -143,10 +144,45 @@ function App() {
       setTurn(newTurn);
     }
   };
+
+  const updateKeyboard = () => {
+    const newKeys = keys.slice();
+    preciseLetters.forEach((letter) => {
+      newKeys.forEach((row) => {
+        const targetKey = row.find((key) => key.name === letter);
+        if (targetKey) {
+          targetKey.value = 'green';
+        }
+      });
+    });
+    correctLetters.forEach((letter) => {
+      newKeys.forEach((row) => {
+        const targetKey = row.find((key) => key.name === letter);
+        if (targetKey) {
+          targetKey.value = 'yellow';
+        }
+      });
+    });
+    wrongLetters.forEach((letter) => {
+      newKeys.forEach((row) => {
+        const targetKey = row.find((key) => key.name === letter);
+        if (targetKey) {
+          targetKey.value = 'gray';
+        }
+      });
+    });
+  };
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   });
+
+  useEffect(updateKeyboard, [
+    keys,
+    preciseLetters,
+    correctLetters,
+    wrongLetters
+  ]);
 
   return (
     <div className="App">

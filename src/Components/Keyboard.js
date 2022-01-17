@@ -1,10 +1,4 @@
-const Keyboard = ({
-  handleKeyClick,
-  keys,
-  preciseLetters,
-  correctLetters,
-  wrongLetters
-}) => {
+const Keyboard = ({ handleKeyClick, keys }) => {
   return (
     <>
       <div className="keyboard">
@@ -12,9 +6,7 @@ const Keyboard = ({
           <div className="row">
             {keyRow.map((key) => (
               <div
-                className={`${key.value} key ${
-                  preciseLetters.includes(key.name) ? 'green' : 'yellow'
-                }`}
+                className={`${key.value} key`}
                 key={key.name}
                 onClick={handleKeyClick}
               >

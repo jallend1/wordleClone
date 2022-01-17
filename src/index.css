@@ -61,3 +61,15 @@ code {
   align-items: center;
   justify-content: center;
 }
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.gray {
+  background-color: grey;
+}
