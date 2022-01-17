@@ -8,6 +8,9 @@ function App() {
   const word = words[1];
   const [turn, setTurn] = useState(0);
   const [message, setMessage] = useState('');
+  const [preciseLetters, setPreciseLetters] = useState([]);
+  const [correctLetters, setCorrectLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const [answerKey, setAnswerKey] = useState([]);
   const [gameBoard, setGameBoard] = useState([
@@ -56,7 +59,6 @@ function App() {
   ]);
 
   const checkGuess = (currentGuess) => {
-    console.log(keys.find((key) => key === currentGuess[0]));
     const answers = new Array(5);
     if (currentGuess.join('') === word) {
       answers.fill('green');
@@ -68,12 +70,28 @@ function App() {
         // If the letter is in the right spot, gets green
         if (word[index] === guess) {
           answers[index] = 'green';
+          // If this letter isn't already in the list of precise answers, add it
+          if (!preciseLetters.includes(guess)) {
+            const newPreciseLetters = preciseLetters.slice();
+            newPreciseLetters.push(guess);
+            setPreciseLetters(newPreciseLetters);
+          }
         }
         // If the letter exists, but is in the wrong spot, gets yellow
         else if (word.includes(guess)) {
           answers[index] = 'yellow';
+          if (!correctLetters.includes(guess)) {
+            const newCorrectLetters = correctLetters.slice();
+            newCorrectLetters.push(guess);
+            setCorrectLetters(newCorrectLetters);
+          }
         } else {
           answers[index] = 'gray';
+          if (!wrongLetters.includes(guess)) {
+            const newWrongLetters = wrongLetters.slice();
+            newWrongLetters.push(guess);
+            setWrongLetters(newWrongLetters);
+          }
         }
       });
     }
@@ -140,7 +158,13 @@ function App() {
         ))}
       </div>
       <p>{word}</p>
-      <Keyboard handleKeyClick={handleKeyClick} keys={keys} />
+      <Keyboard
+        handleKeyClick={handleKeyClick}
+        keys={keys}
+        preciseLetters={preciseLetters}
+        correctLetters={correctLetters}
+        wrongLetters={wrongLetters}
+      />
     </div>
   );
 }
