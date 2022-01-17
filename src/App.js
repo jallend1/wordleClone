@@ -146,6 +146,7 @@ function App() {
   };
 
   const updateKeyboard = () => {
+    console.log('inside update!');
     const newKeys = keys.slice();
     preciseLetters.forEach((letter) => {
       newKeys.forEach((row) => {
@@ -156,9 +157,9 @@ function App() {
       });
     });
     correctLetters.forEach((letter) => {
-      newKeys.forEach((row) => {
+      newKeys.forEach((row, index) => {
         const targetKey = row.find((key) => key.name === letter);
-        if (targetKey) {
+        if (targetKey && preciseLetters.indexOf(letter) === -1) {
           targetKey.value = 'yellow';
         }
       });
