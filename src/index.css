@@ -23,11 +23,11 @@ code {
 .letter {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 2rem;
   line-height: 2rem;
   width: 50px;
   height: 60px;
-  /* background-color: blueviolet; */
   margin: 0.25em;
   border: solid 3px gray;
 }
@@ -35,6 +35,13 @@ code {
 .keyboard {
   display: flex;
   flex-direction: column;
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(3, 60px);
+  grid-template-columns: repeat(20, 30px);
+  grid-gap: 5px;
 }
 
 .top-keys,
@@ -45,7 +52,8 @@ code {
 
 .key {
   background-color: #d3d6da;
-  display: flex;
+  /* display: flex; */
+  grid-column: span 2;
   border-radius: 4px;
   margin: 4px 6px 0 0;
   height: 58px;

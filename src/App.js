@@ -18,8 +18,45 @@ function App() {
     [null, null, null, null, null],
     [null, null, null, null, null]
   ]);
+  const [keys, setKeys] = useState([
+    [
+      { name: 'q', value: null },
+      { name: 'w', value: null },
+      { name: 'e', value: null },
+      { name: 'r', value: null },
+      { name: 't', value: null },
+      { name: 'y', value: null },
+      { name: 'u', value: null },
+      { name: 'i', value: null },
+      { name: 'o', value: null },
+      { name: 'p', value: null }
+    ],
+    [
+      { name: 'a', value: null },
+      { name: 's', value: null },
+      { name: 'd', value: null },
+      { name: 'f', value: null },
+      { name: 'g', value: null },
+      { name: 'h', value: null },
+      { name: 'j', value: null },
+      { name: 'k', value: null },
+      { name: 'l', value: null }
+    ],
+    [
+      { name: 'Enter', value: null },
+      { name: 'z', value: null },
+      { name: 'x', value: null },
+      { name: 'c', value: null },
+      { name: 'v', value: null },
+      { name: 'b', value: null },
+      { name: 'n', value: null },
+      { name: 'm', value: null },
+      { name: 'del', value: null }
+    ]
+  ]);
 
   const checkGuess = (currentGuess) => {
+    console.log(keys.find((key) => key === currentGuess[0]));
     const answers = new Array(5);
     if (currentGuess.join('') === word) {
       answers.fill('green');
@@ -103,7 +140,7 @@ function App() {
         ))}
       </div>
       <p>{word}</p>
-      <Keyboard handleKeyClick={handleKeyClick} />
+      <Keyboard handleKeyClick={handleKeyClick} keys={keys} />
     </div>
   );
 }
