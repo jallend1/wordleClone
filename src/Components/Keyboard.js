@@ -3,7 +3,7 @@ const Keyboard = ({ handleKeyClick, keys }) => {
     <>
       <div className="keyboard">
         {keys.map((keyRow) => (
-          <div className="row">
+          <div className="row keyboard-row">
             {keyRow.map((key) => (
               <div
                 className={`${key.value} key`}
