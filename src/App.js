@@ -13,6 +13,7 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const [answerKey, setAnswerKey] = useState([]);
+  const [hasBeenChecked, setHasBeenChecked] = useState(true);
   const [gameBoard, setGameBoard] = useState([
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -117,10 +118,24 @@ function App() {
     return turn % 5;
   };
 
+  const handleDelete = () => {
+    console.log('Deleting!!');
+  };
+
   const handleKeyPress = (e) => {
     if (e.keyCode >= 65 && e.keyCode <= 90) {
-      const letter = e.key;
-      handleLetter(letter);
+      // If it's not the first turn, but it's the end of a word AND it hasn't been submitted yet, tell user to submit
+      if (turn !== 0 && turn % 5 === 0 && hasBeenChecked === false) {
+        setMessage('Please press enter to submit.');
+      } else {
+        const letter = e.key;
+        handleLetter(letter);
+      }
+    } else if (e.keyCode === 13) {
+      setMessage('');
+      handleSubmit();
+    } else if (e.keyCode === 8 || e.keyCode === 46) {
+      handleDelete();
     }
   };
 
@@ -132,17 +147,30 @@ function App() {
   const handleLetter = (letter) => {
     // TODO: Implement Enter / Backspace Checks
     // TODO: Stop auto-sending it over for check after 5th letter; Wait for enter
+    const row = determineRow();
+    const rowIndex = determineRowIndex();
+    console.log(gameBoard[row].length);
     if (!isGameOver) {
-      const row = determineRow();
-      const rowIndex = determineRowIndex();
+      setHasBeenChecked(false);
       const newGameBoard = gameBoard.slice();
       newGameBoard[row][rowIndex] = letter;
       setGameBoard(newGameBoard);
-      if (rowIndex === 4) {
-        checkGuess(newGameBoard[row]);
-      }
       const newTurn = turn + 1;
       setTurn(newTurn);
+      // if (rowIndex === 4) {
+      //   checkGuess(newGameBoard[row]);
+      // }
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log('Submitting!');
+    if (turn % 5 === 0 && turn !== 0) {
+      const currentRow = determineRow() - 1;
+      checkGuess(gameBoard[currentRow]);
+      setHasBeenChecked(true);
+    } else {
+      setMessage('Not enough letters.');
     }
   };
 
