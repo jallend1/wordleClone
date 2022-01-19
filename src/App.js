@@ -146,10 +146,8 @@ function App() {
 
   const handleLetter = (letter) => {
     // TODO: Implement Enter / Backspace Checks
-    // TODO: Stop auto-sending it over for check after 5th letter; Wait for enter
     const row = determineRow();
     const rowIndex = determineRowIndex();
-    console.log(gameBoard[row].length);
     if (!isGameOver) {
       setHasBeenChecked(false);
       const newGameBoard = gameBoard.slice();
@@ -157,15 +155,11 @@ function App() {
       setGameBoard(newGameBoard);
       const newTurn = turn + 1;
       setTurn(newTurn);
-      // if (rowIndex === 4) {
-      //   checkGuess(newGameBoard[row]);
-      // }
     }
   };
 
   const handleSubmit = () => {
-    console.log('Submitting!');
-    if (turn % 5 === 0 && turn !== 0) {
+    if (turn % 5 === 0 && turn !== 0 && !hasBeenChecked) {
       const currentRow = determineRow() - 1;
       checkGuess(gameBoard[currentRow]);
       setHasBeenChecked(true);
