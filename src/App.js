@@ -118,6 +118,7 @@ function App() {
     return turn % 5;
   };
 
+  // TODO: Get this rocking!
   const handleDelete = () => {
     console.log('Deleting!!');
   };
@@ -141,11 +142,16 @@ function App() {
 
   const handleKeyClick = (e) => {
     const letter = e.target.textContent.toLowerCase();
-    handleLetter(letter);
+    if (letter === 'enter') {
+      handleSubmit();
+    } else if (letter === 'del') {
+      handleDelete();
+    } else {
+      handleLetter(letter);
+    }
   };
 
   const handleLetter = (letter) => {
-    // TODO: Implement Enter / Backspace Checks
     const row = determineRow();
     const rowIndex = determineRowIndex();
     if (!isGameOver) {
