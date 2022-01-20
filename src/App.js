@@ -121,6 +121,10 @@ function App() {
   const handleDelete = () => {
     const currentRow = determineRow();
     const currentRowIndex = determineRowIndex();
+    if (currentRowIndex === 0) {
+      setMessage("Sorry, you're at the beginning of the line.");
+      return;
+    }
     const newGameBoard = gameBoard.slice();
     // Restores the previous index to null
     newGameBoard[currentRow][currentRowIndex - 1] = null;
