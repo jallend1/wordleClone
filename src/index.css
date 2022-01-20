@@ -1,13 +1,34 @@
+@font-face {
+  font-family: 'Clear Sans';
+  font-style: normal;
+  src: local('Clear Sans'), url('./fonts/ClearSans/ClearSans-Regular.ttf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   max-width: 600px;
   margin: auto;
   text-align: center;
+}
+
+header {
+  border-bottom: 1px solid #d3d6da;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+}
+
+h1 {
+  letter-spacing: 0.2rem;
+  font-weight: 700;
+  font-size: 36px;
 }
 
 .row {
