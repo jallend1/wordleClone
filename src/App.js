@@ -118,9 +118,16 @@ function App() {
     return turn % 5;
   };
 
-  // TODO: Get this rocking!
   const handleDelete = () => {
-    console.log('Deleting!!');
+    const currentRow = determineRow();
+    const currentRowIndex = determineRowIndex();
+    const newGameBoard = gameBoard.slice();
+    // Restores the previous index to null
+    newGameBoard[currentRow][currentRowIndex - 1] = null;
+    // Doesn't count backspace as a turn
+    const newTurn = turn - 1;
+    setGameBoard(newGameBoard);
+    setTurn(newTurn);
   };
 
   const handleKeyPress = (e) => {
