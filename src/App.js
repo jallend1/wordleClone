@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
+import { pickAWord } from './wordList';
 import Header from './Components/Header';
 import WordRow from './Components/WordRow';
 import Keyboard from './Components/Keyboard';
 
 function App() {
-  const words = ['howdy', 'score'];
-  const word = words[1];
+  // const words = ['howdy', 'score'];
+  // const word = words[1];
+  const [word, setWord] = useState(pickAWord());
   const [turn, setTurn] = useState(0);
   const [message, setMessage] = useState('');
   const [preciseLetters, setPreciseLetters] = useState([]);
@@ -227,6 +229,7 @@ function App() {
     wrongLetters
   ]);
 
+  pickAWord();
   return (
     <div className="App">
       <Header />
