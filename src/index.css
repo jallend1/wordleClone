@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   max-width: 600px;
@@ -27,25 +27,33 @@ header {
 
 h1 {
   letter-spacing: 0.2rem;
-  font-weight: 700;
   font-size: 36px;
 }
 
+.gameboard {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  max-width: 400px;
+  margin: auto;
+  row-gap: 5px;
+}
+
 .row {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 5px;
 }
 
 .letter {
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   line-height: 2rem;
-  width: 50px;
   height: 60px;
-  margin: 0.25em;
-  border: solid 3px gray;
+  border: solid 1px gray;
   font-weight: bold;
 }
 
@@ -56,6 +64,8 @@ h1 {
 
 .keyboard-row {
   padding: 0.25em;
+  display: flex;
+  justify-content: center;
 }
 
 .keyboard-row:nth-of-type(2) {
@@ -63,14 +73,17 @@ h1 {
 }
 
 .key {
+  display: flex;
   background-color: #d3d6da;
   border-radius: 4px;
   margin: 4px 6px 0 0;
-  height: 58px;
+  height: 60px;
   flex: 1;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  letter-spacing: 0.1em;
+  padding: 0 0.5em;
 }
 
 .green {
@@ -81,13 +94,16 @@ h1 {
 .yellow {
   background-color: #c9b458;
   color: #fff;
+  border: none;
 }
 
 .gray {
   background-color: #787c7e;
   color: #fff;
+  border: none;
 }
 
 .green > p {
-  color: white;
+  color: #fff;
+  border: none;
 }
