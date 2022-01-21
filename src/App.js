@@ -137,19 +137,21 @@ function App() {
   };
 
   const handleKeyPress = (e) => {
-    if (e.keyCode >= 65 && e.keyCode <= 90) {
-      // If it's not the first turn, but it's the end of a word AND it hasn't been submitted yet, tell user to submit
-      if (turn !== 0 && turn % 5 === 0 && hasBeenChecked === false) {
-        setMessage('Please press enter to submit.');
-      } else {
-        const letter = e.key;
-        handleLetter(letter);
+    if (!isGameOver) {
+      if (e.keyCode >= 65 && e.keyCode <= 90) {
+        // If it's not the first turn, but it's the end of a word AND it hasn't been submitted yet, tell user to submit
+        if (turn !== 0 && turn % 5 === 0 && hasBeenChecked === false) {
+          setMessage('Please press enter to submit.');
+        } else {
+          const letter = e.key;
+          handleLetter(letter);
+        }
+      } else if (e.keyCode === 13) {
+        setMessage('');
+        handleSubmit();
+      } else if (e.keyCode === 8 || e.keyCode === 46) {
+        handleDelete();
       }
-    } else if (e.keyCode === 13) {
-      setMessage('');
-      handleSubmit();
-    } else if (e.keyCode === 8 || e.keyCode === 46) {
-      handleDelete();
     }
   };
 
