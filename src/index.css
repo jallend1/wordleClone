@@ -46,6 +46,7 @@ h1 {
   height: 60px;
   margin: 0.25em;
   border: solid 3px gray;
+  font-weight: bold;
 }
 
 .keyboard {
@@ -69,16 +70,24 @@ h1 {
   flex: 1;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 }
 
 .green {
-  background-color: green;
+  background-color: #6aaa64;
+  color: #fff;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #c9b458;
+  color: #fff;
 }
 
 .gray {
-  background-color: grey;
+  background-color: #787c7e;
+  color: #fff;
+}
+
+.green > p {
+  color: white;
 }

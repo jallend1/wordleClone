@@ -4,11 +4,8 @@ const WordRow = ({ letters, answers }) => {
       {letters &&
         letters.map((letter, index) => (
           <div
-            className="letter"
+            className={`letter ${answers ? answers[index] : null}`}
             key={Math.random()}
-            style={{
-              backgroundColor: answers ? answers[index] : null
-            }}
           >
             <p>{letter ? letter.toUpperCase() : null}</p>
           </div>

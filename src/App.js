@@ -188,6 +188,7 @@ function App() {
   const updateKeyboard = () => {
     // TODO: This whole thing needs some cleanup.
     // TODO: Accidentally directly updating state here by modifying the object
+    // TODO: Use keyboard code to implement style on letter tiles
     const newKeys = keys.slice();
     preciseLetters.forEach((letter) => {
       newKeys.forEach((row) => {
