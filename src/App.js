@@ -16,6 +16,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [answerKey, setAnswerKey] = useState([]);
   const [hasBeenChecked, setHasBeenChecked] = useState(true);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [gameBoard, setGameBoard] = useState([
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -232,6 +233,7 @@ function App() {
   ]);
 
   pickAWord();
+
   return (
     <div className="App">
       <Header />
@@ -249,6 +251,7 @@ function App() {
         correctLetters={correctLetters}
         wrongLetters={wrongLetters}
       />
+      <div className="modal"></div>
     </div>
   );
 }
