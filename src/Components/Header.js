@@ -1,7 +1,7 @@
-const Header = () => {
+const Header = ({ handleHelpClick }) => {
   return (
     <header>
-      <div className="help">
+      <div className="help" onClick={handleHelpClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="24"

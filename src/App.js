@@ -3,6 +3,7 @@ import { pickAWord } from './wordList';
 import Header from './Components/Header';
 import WordRow from './Components/WordRow';
 import Keyboard from './Components/Keyboard';
+import HowToPlay from './Components/HowToPlay';
 
 function App() {
   // const words = ['howdy', 'score'];
@@ -16,7 +17,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState(false);
   const [answerKey, setAnswerKey] = useState([]);
   const [hasBeenChecked, setHasBeenChecked] = useState(true);
-  const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [displayHelp, setDisplayHelp] = useState(false);
   const [gameBoard, setGameBoard] = useState([
     [null, null, null, null, null],
     [null, null, null, null, null],
@@ -137,6 +138,11 @@ function App() {
     setTurn(newTurn);
   };
 
+  const handleHelpClick = () => {
+    const newDisplayHelp = !displayHelp;
+    setDisplayHelp(newDisplayHelp);
+  };
+
   const handleKeyPress = (e) => {
     if (!isGameOver) {
       if (e.keyCode >= 65 && e.keyCode <= 90) {
@@ -236,21 +242,31 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <h2>{message}</h2>
-      <div className="gameboard">
-        {gameBoard.map((letters, index) => (
-          <WordRow letters={letters} answers={answerKey[index]} key={index} />
-        ))}
-      </div>
-      <p>{word}</p>
-      <Keyboard
-        handleKeyClick={handleKeyClick}
-        keys={keys}
-        preciseLetters={preciseLetters}
-        correctLetters={correctLetters}
-        wrongLetters={wrongLetters}
-      />
+      <Header handleHelpClick={handleHelpClick} />
+      {displayHelp === true ? (
+        <HowToPlay />
+      ) : (
+        <div>
+          <h2>{message}</h2>
+          <div className="gameboard">
+            {gameBoard.map((letters, index) => (
+              <WordRow
+                letters={letters}
+                answers={answerKey[index]}
+                key={index}
+              />
+            ))}
+          </div>
+          <p>{word}</p>
+          <Keyboard
+            handleKeyClick={handleKeyClick}
+            keys={keys}
+            preciseLetters={preciseLetters}
+            correctLetters={correctLetters}
+            wrongLetters={wrongLetters}
+          />
+        </div>
+      )}
       <div className="modal"></div>
     </div>
   );
