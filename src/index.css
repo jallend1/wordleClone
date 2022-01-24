@@ -11,14 +11,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   max-width: 600px;
   margin: auto;
-  text-align: center;
 }
 
-header {
+.main-header {
   border-bottom: 1px solid #d3d6da;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.help-header {
+  display: grid;
+  grid-template-columns: auto 10px;
 }
 
 .menu {
@@ -28,6 +32,10 @@ header {
 h1 {
   letter-spacing: 0.2rem;
   font-size: 36px;
+}
+
+h2 {
+  text-align: center;
 }
 
 .gameboard {
@@ -106,4 +114,23 @@ h1 {
 .green > p {
   color: #fff;
   border: none;
+}
+
+.about {
+  font-size: 14px;
+}
+
+.about p {
+  text-align: left;
+}
+
+.wordle {
+  font-weight: bold;
+}
+
+.examples {
+  border-top: 1px solid rgb(211, 214, 218);
+  border-bottom: 1px solid rgb(211, 214, 218);
+  margin: 2em 0;
+  padding: 1em 0;
 }

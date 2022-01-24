@@ -1,6 +1,6 @@
 const Header = ({ handleHelpClick }) => {
   return (
-    <header>
+    <header class="main-header">
       <div className="help" onClick={handleHelpClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

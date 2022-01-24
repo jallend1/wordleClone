@@ -242,11 +242,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header handleHelpClick={handleHelpClick} />
       {displayHelp === true ? (
-        <HowToPlay />
+        <HowToPlay handleHelpClick={handleHelpClick} />
       ) : (
         <div>
+          <Header handleHelpClick={handleHelpClick} />
           <h2>{message}</h2>
           <div className="gameboard">
             {gameBoard.map((letters, index) => (
